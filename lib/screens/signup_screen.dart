@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_responsive/mytheme.dart';
+import 'package:flutter_responsive/widgets/input_form.dart';
 import 'package:flutter_responsive/widgets/social_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -119,72 +120,26 @@ class SignUpForm extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: TextFormField(
-                  style: GoogleFonts.sono(
-                    textStyle: const TextStyle(),
-                  ),
+                child: InputForm(
                   controller: nameController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "Name",
-                    hintStyle: GoogleFonts.sono(
-                      textStyle: const TextStyle(
-                        color: Colors.black45,
-                      ),
-                    ),
-                    fillColor: MyTheme.greyColor,
-                    filled: true,
-                  ),
+                  hintText: 'Name',
+                  obscureText: false,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12),
-                child: TextFormField(
-                  style: GoogleFonts.sono(
-                    textStyle: const TextStyle(),
-                  ),
+                child: InputForm(
                   controller: emailController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "Email Address",
-                    hintStyle: GoogleFonts.sono(
-                      textStyle: const TextStyle(
-                        color: Colors.black45,
-                      ),
-                    ),
-                    fillColor: MyTheme.greyColor,
-                    filled: true,
-                  ),
+                  hintText: 'Email Address',
+                  obscureText: false,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12),
-                child: TextFormField(
-                  style: GoogleFonts.sono(
-                    textStyle: const TextStyle(),
-                  ),
+                child: InputForm(
                   controller: passwordController,
+                  hintText: 'Password',
                   obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "Password",
-                    hintStyle: GoogleFonts.sono(
-                      textStyle: const TextStyle(
-                        color: Colors.black45,
-                      ),
-                    ),
-                    fillColor: MyTheme.greyColor,
-                    filled: true,
-                  ),
                 ),
               ),
               Padding(
@@ -192,26 +147,10 @@ class SignUpForm extends StatelessWidget {
                   top: 12,
                   bottom: 16,
                 ),
-                child: TextFormField(
-                  style: GoogleFonts.sono(
-                    textStyle: const TextStyle(),
-                  ),
+                child: InputForm(
                   controller: cnfPassController,
+                  hintText: 'Confirm Password',
                   obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "Confirm Password",
-                    hintStyle: GoogleFonts.sono(
-                      textStyle: const TextStyle(
-                        color: Colors.black45,
-                      ),
-                    ),
-                    fillColor: MyTheme.greyColor,
-                    filled: true,
-                  ),
                 ),
               ),
               ElevatedButton(

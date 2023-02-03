@@ -38,7 +38,7 @@ class SocialLoginButtons extends StatelessWidget {
                     ),
                     Text(
                       "Google",
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.sono(
                         textStyle: const TextStyle(
                           color: Color(0xFF666666),
                           fontWeight: FontWeight.w600,
@@ -80,7 +80,7 @@ class SocialLoginButtons extends StatelessWidget {
                     ),
                     Text(
                       "Facebook",
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.sono(
                         textStyle: const TextStyle(
                           color: Color(0xFF666666),
                           fontWeight: FontWeight.w600,

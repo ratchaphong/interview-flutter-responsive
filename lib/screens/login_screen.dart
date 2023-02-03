@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_responsive/mytheme.dart';
 import 'package:flutter_responsive/widgets/social_button.dart';
+import 'package:flutter_responsive/widgets/input_form.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -143,52 +144,18 @@ class LoginForm extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: TextFormField(
+                child: InputForm(
                   controller: emailController,
-                  style: GoogleFonts.sono(
-                    textStyle: const TextStyle(),
-                  ),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "Username",
-                    // hintStyle: const TextStyle(
-                    //   color: Colors.black45,
-                    // ),
-                    hintStyle: GoogleFonts.sono(
-                      textStyle: const TextStyle(
-                        color: Colors.black45,
-                      ),
-                    ),
-                    fillColor: MyTheme.greyColor,
-                    filled: true,
-                  ),
+                  hintText: "Username",
+                  obscureText: false,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12),
-                child: TextFormField(
+                child: InputForm(
                   controller: passwordController,
+                  hintText: "Password",
                   obscureText: true,
-                  style: GoogleFonts.sono(
-                    textStyle: const TextStyle(),
-                  ),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(4),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "Password",
-                    hintStyle: GoogleFonts.sono(
-                      textStyle: const TextStyle(
-                        color: Colors.black45,
-                      ),
-                    ),
-                    fillColor: MyTheme.greyColor,
-                    filled: true,
-                  ),
                 ),
               ),
               Padding(
@@ -350,10 +317,6 @@ class LoginForm extends StatelessWidget {
               ),
               TextSpan(
                 text: "Sign up",
-                // style: const TextStyle(
-                //   decoration: TextDecoration.underline,
-                //   fontWeight: FontWeight.w700,
-                // ),
                 style: GoogleFonts.roboto(
                   textStyle: const TextStyle(
                     decoration: TextDecoration.underline,
