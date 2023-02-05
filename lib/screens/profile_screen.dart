@@ -17,17 +17,16 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isResume = true;
   bool isShowArticle = false;
+  double vertical = 32;
+  double horizotal = 16;
+  double imageSize = 120;
+  double iconSize = 48;
 
   @override
   Widget build(BuildContext context) {
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     Orientation orientation = MediaQuery.of(context).orientation;
-
     Size size = MediaQuery.of(context).size;
-    double vertical = 32;
-    double horizotal = 16;
-    double imageSize = 120;
-    double cameraIconSize = 48;
 
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: MyTheme.splash));
@@ -73,11 +72,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       minHeight: 140,
                     ),
                     child: Avatar(
-                        orientation: orientation,
-                        size: size,
-                        imageSize: imageSize,
-                        horizotal: horizotal,
-                        cameraIconSize: cameraIconSize),
+                      orientation: orientation,
+                      size: size,
+                      imageSize: imageSize,
+                      horizotal: horizotal,
+                      icon: Icons.edit_outlined,
+                      iconSize: iconSize,
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/profile/edit');
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),

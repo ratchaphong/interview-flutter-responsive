@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_responsive/mytheme.dart';
+import 'package:flutter_responsive/screens/extract_arguments_screen.dart';
+import 'package:flutter_responsive/screens/pass_arguments_screen.dart';
 import 'package:flutter_responsive/widgets/input_form.dart';
 import 'package:flutter_responsive/widgets/social_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,10 +21,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final cnfPassController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-    final Orientation _orientation = MediaQuery.of(context).orientation;
+    final Size size = MediaQuery.of(context).size;
+    final Orientation orientation = MediaQuery.of(context).orientation;
 
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -30,14 +33,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: MyTheme.splash,
       resizeToAvoidBottomInset: false,
-      body: _orientation == Orientation.portrait
+      body: orientation == Orientation.portrait
           ? SafeArea(
               // ignore: sized_box_for_whitespace
               child: Container(
-                height: _size.height,
-                width: _size.width,
+                height: size.height,
+                width: size.width,
                 child: SignUpForm(
-                    size: _size,
+                    size: size,
                     nameController: nameController,
                     emailController: emailController,
                     passwordController: passwordController,
@@ -48,13 +51,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: SafeArea(
                 child: Center(
                   child: Container(
-                    width: _size.width * 0.7,
+                    width: size.width * 0.7,
                     // ignore: prefer_const_constructors
                     padding: EdgeInsets.symmetric(
                       vertical: 16,
                     ),
                     child: SignUpForm(
-                        size: _size,
+                        size: size,
                         nameController: nameController,
                         emailController: emailController,
                         passwordController: passwordController,
@@ -89,7 +92,28 @@ class SignUpForm extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset("assets/images/splash_icon.svg"),
+        InkWell(
+          child: SvgPicture.asset("assets/images/splash_icon.svg"),
+          onTap: () {
+            // Navigator.pushNamed(
+            //   context,
+            //   ExtractArgumentsScreen.routeName,
+            //   arguments: ScreenArguments(
+            //     'Extract Arguments Screen',
+            //     'This message is extracted in the build method.',
+            //   ),
+            // );
+            Navigator.pushNamed(
+              context,
+              PassArgumentsScreen.routeName,
+              arguments: ScreenArguments(
+                'Accept Arguments Screen',
+                'This message is extracted in the onGenerateRoute '
+                    'function.',
+              ),
+            );
+          },
+        ),
         const SizedBox(
           height: 24,
         ),

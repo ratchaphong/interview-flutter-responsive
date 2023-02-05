@@ -6,7 +6,9 @@ class Avatar extends StatelessWidget {
   final Size size;
   final double imageSize;
   final double horizotal;
-  final double cameraIconSize;
+  final IconData icon;
+  final double iconSize;
+  final Function() onTap;
 
   const Avatar({
     Key? key,
@@ -14,7 +16,9 @@ class Avatar extends StatelessWidget {
     required this.size,
     required this.imageSize,
     required this.horizotal,
-    required this.cameraIconSize,
+    required this.iconSize,
+    required this.icon,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -57,20 +61,23 @@ class Avatar extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: imageSize - (4 * 2) - (cameraIconSize / 2) - 4,
+          top: imageSize - (4 * 2) - (iconSize / 2) - 4,
           left: orientation == Orientation.landscape
               ? (size.width * 0.7) * 0.5
               : size.width * 0.5,
           child: Container(
-            height: cameraIconSize,
-            width: cameraIconSize,
+            height: iconSize,
+            width: iconSize,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(cameraIconSize / 2),
+              borderRadius: BorderRadius.circular(iconSize / 2),
               color: MyTheme.appBarColor,
             ),
-            child: const Icon(
-              Icons.edit_outlined,
-              color: Colors.white,
+            child: InkWell(
+              onTap: onTap,
+              child: Icon(
+                icon,
+                color: Colors.white,
+              ),
             ),
           ),
         )

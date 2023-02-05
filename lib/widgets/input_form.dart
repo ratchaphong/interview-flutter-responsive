@@ -36,6 +36,7 @@ class InputForm extends StatelessWidget {
         fillColor: MyTheme.greyColor,
         filled: true,
       ),
+      cursorColor: Colors.black45,
     );
   }
 }

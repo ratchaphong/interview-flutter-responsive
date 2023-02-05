@@ -22,8 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-    final Orientation _orientation = MediaQuery.of(context).orientation;
+    final Size size = MediaQuery.of(context).size;
+    final Orientation orientation = MediaQuery.of(context).orientation;
 
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -31,14 +31,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: MyTheme.splash,
       resizeToAvoidBottomInset: false,
-      body: _orientation == Orientation.portrait
+      body: orientation == Orientation.portrait
           ? SafeArea(
               child: Container(
                 color: Colors.transparent,
-                height: _size.height,
-                width: _size.width,
+                height: size.height,
+                width: size.width,
                 child: LoginForm(
-                  size: _size,
+                  size: size,
                   emailController: emailController,
                   passwordController: passwordController,
                 ),
@@ -50,10 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.center,
                   child: Container(
                     color: Colors.transparent,
-                    width: _size.width * 0.7,
+                    width: size.width * 0.7,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: LoginForm(
-                      size: _size,
+                      size: size,
                       emailController: emailController,
                       passwordController: passwordController,
                     ),
