@@ -4,3 +4,19 @@ part of 'auth_bloc.dart';
 abstract class AuthState {}
 
 class AuthInitial extends AuthState {}
+
+class AuthLoading extends AuthState {}
+
+class AuthError extends AuthState {
+  final String message;
+
+  AuthError(this.message);
+}
+
+class AuthFinish extends AuthState {
+  final Data auth;
+
+  AuthFinish(this.auth);
+}
+
+class SignUpFinish extends AuthState {}

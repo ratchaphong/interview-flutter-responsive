@@ -24,17 +24,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(
-        //   create: (context) => SubjectBloc(),
-        // ),
         BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(AuthRepository(AuthProvider()))),
-        // BlocProvider(
-        //   create: (context) => SubjectBloc(),
-        // ),
       ],
       child: MaterialApp(
-        title: 'Named Routes Demo',
+        title: 'Find Seat',
         theme: ThemeData(
           inputDecorationTheme: InputDecorationTheme(
             prefixIconColor: MyTheme.splash,
@@ -51,6 +45,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
                 color: Colors.black.withOpacity(0.7),
+                wordSpacing: 0,
               ),
             ),
             headline2: GoogleFonts.sono(

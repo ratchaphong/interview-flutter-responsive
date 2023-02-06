@@ -23,16 +23,30 @@ class Data {
   int? id;
   String? name;
   String? surname;
+  String? occupation;
+  String? email;
   String? phoneNumber;
+  String? address;
   String? token;
 
-  Data({this.id, this.name, this.surname, this.phoneNumber, this.token});
+  Data(
+      {this.id,
+      this.name,
+      this.surname,
+      this.occupation,
+      this.email,
+      this.phoneNumber,
+      this.address,
+      this.token});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     surname = json['surname'];
+    occupation = json['occupation'];
+    email = json['email'];
     phoneNumber = json['phone_number'];
+    address = json['address'];
     token = json['token'];
   }
 
@@ -41,7 +55,10 @@ class Data {
     data['id'] = id;
     data['name'] = name;
     data['surname'] = surname;
+    data['occupation'] = occupation;
+    data['email'] = email;
     data['phone_number'] = phoneNumber;
+    data['address'] = address;
     data['token'] = token;
     return data;
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
 import 'package:flutter_responsive/mytheme.dart';
 import 'package:flutter_responsive/screens/extract_arguments_screen.dart';
 import 'package:flutter_responsive/screens/pass_arguments_screen.dart';
@@ -21,6 +23,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final cnfPassController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    nameController.text = "jarmann";
+    emailController.text = "mmjarmann@gmail.com";
+    passwordController.text = "jarmann";
+    cnfPassController.text = "jarmann";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,15 +114,15 @@ class SignUpForm extends StatelessWidget {
             //     'This message is extracted in the build method.',
             //   ),
             // );
-            Navigator.pushNamed(
-              context,
-              PassArgumentsScreen.routeName,
-              arguments: ScreenArguments(
-                'Accept Arguments Screen',
-                'This message is extracted in the onGenerateRoute '
-                    'function.',
-              ),
-            );
+            // Navigator.pushNamed(
+            //   context,
+            //   PassArgumentsScreen.routeName,
+            //   arguments: ScreenArguments(
+            //     'Accept Arguments Screen',
+            //     'This message is extracted in the onGenerateRoute '
+            //         'function.',
+            //   ),
+            // );
           },
         ),
         const SizedBox(
@@ -179,13 +190,22 @@ class SignUpForm extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // if (InputValidator.validateField("Name", nameController.text.trim()) &&
-                  //     InputValidator.validateField("Email", emailController.text.trim())) {
-                  //   if (InputValidator.validatePassword(passwordController.text, cnfPassController.text)) {
-                  //     AuthController.instance
-                  //         .registerUser(emailController.text.trim(), passwordController.text.trim());
-                  //   }
-                  // }
+                  if (nameController.text.trim() != '' &&
+                      emailController.text.trim() != '' &&
+                      passwordController.text.trim() != '' &&
+                      cnfPassController.text.trim() != '' &&
+                      cnfPassController.text.trim() ==
+                          passwordController.text.trim()) {
+                    BlocProvider.of<AuthBloc>(context).add(
+                      SignUpEvent(
+                          nameController.text.trim(),
+                          passwordController.text.trim(),
+                          emailController.text.trim()),
+                    );
+                    // ----------------------------
+                    Navigator.of(context).pushNamed("/login");
+                    // ----------------------------
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyTheme.splash,
@@ -241,7 +261,6 @@ class SignUpForm extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(
                   top: 16,
-                  // bottom: 16
                 ),
                 child:
                     SocialLoginButtons(onFbClick: () {}, onGoogleClick: () {}),
@@ -271,7 +290,6 @@ class SignUpForm extends StatelessWidget {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     Navigator.of(context).pop();
-                    // Get.back();
                   },
               ),
               TextSpan(

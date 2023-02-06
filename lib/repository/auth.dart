@@ -8,11 +8,20 @@ class AuthRepository {
   AuthRepository(this.provider);
 
   Future<Data?> login(
-    String userName,
+    String email,
     String password,
   ) async {
     authData = await provider
-        .login(userName, password, {userName: userName, password: password});
+        .login(email, password, {"email": email, "password": password});
     return authData;
+  }
+
+  Future signup(
+    String name,
+    String password,
+    String email,
+  ) async {
+    await provider.signup(name, password, email);
+    return;
   }
 }

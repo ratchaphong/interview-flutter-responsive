@@ -2,11 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
 import 'package:flutter_responsive/mytheme.dart';
 import 'package:flutter_responsive/widgets/social_button.dart';
 import 'package:flutter_responsive/widgets/input_form.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,6 +21,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final forgotEmailController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    emailController.text = "jarmann@gmail.com";
+    passwordController.text = "jarmann";
+    forgotEmailController.text = "jarmann@gmail.com";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +100,7 @@ class LoginForm extends StatelessWidget {
             // fit: BoxFit.cover,
           ),
           onTap: () {
-            Navigator.of(context).pushNamed("/profile");
+            // Navigator.of(context).pushNamed("/profile");
           },
         ),
         Padding(
@@ -231,12 +241,13 @@ class LoginForm extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // AuthController.instance.login(
-                  //     emailController.text.trim(),
-                  //     passwordController.text.trim());
-                  if (kDebugMode) {
-                    print(emailController.text.trim());
-                    print(passwordController.text.trim());
+                  if (emailController.text.trim() != '' &&
+                      passwordController.text.trim() != '') {
+                    BlocProvider.of<AuthBloc>(context).add(
+                      LoginEvent(emailController.text.trim(),
+                          passwordController.text.trim()),
+                    );
+                    Navigator.of(context).pushNamed("/profile");
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -296,9 +307,7 @@ class LoginForm extends StatelessWidget {
                 ),
                 child: SocialLoginButtons(
                   onFbClick: () {},
-                  onGoogleClick: () {
-                    // AuthController.instance.googleLogin();
-                  },
+                  onGoogleClick: () {},
                 ),
               ),
             ],
@@ -325,9 +334,7 @@ class LoginForm extends StatelessWidget {
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (_) => SignUpScreen()));
                     Navigator.pushNamed(context, "/signup");
-                    // Get.to(const SignUpScreen());
                   },
               ),
               TextSpan(
