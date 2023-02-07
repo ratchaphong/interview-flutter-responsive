@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
 import 'package:flutter_responsive/mytheme.dart';
+import 'package:flutter_responsive/screens/edit_profile_screen.dart';
 import 'package:flutter_responsive/widgets/article_widget.dart';
 import 'package:flutter_responsive/widgets/avatar.dart';
 import 'package:flutter_responsive/widgets/contact_info.dart';
@@ -103,8 +104,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               icon: Icons.edit_outlined,
                               iconSize: iconSize,
                               onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed('/profile/edit');
+                                // Navigator.of(context)
+                                //     .pushNamed('/profile/edit');
+                                Navigator.pushNamed(
+                                  context,
+                                  "/profile/edit",
+                                  arguments: EditProfileArgs(state.auth),
+                                );
                               },
                             ),
                           ),
