@@ -19,4 +19,6 @@ class AuthFinish extends AuthState {
   AuthFinish(this.auth);
 }
 
+class LogoutFinish extends AuthState {}
+
 class SignUpFinish extends AuthState {}

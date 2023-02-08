@@ -10,6 +10,8 @@ class LoginEvent extends AuthEvent {
   LoginEvent(this.email, this.password);
 }
 
+class LogoutEvnet extends AuthEvent {}
+
 class SignUpEvent extends AuthEvent {
   final String name;
   final String password;

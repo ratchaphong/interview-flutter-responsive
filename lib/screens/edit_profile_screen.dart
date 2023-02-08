@@ -13,7 +13,15 @@ import 'package:flutter_responsive/widgets/input_edit_form.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  final String? name;
+  final String? email;
+  final String? phoneNumber;
+  final String? address;
+
+  static const routeName = '/profile/edit';
+
+  const EditProfileScreen(
+      {super.key, this.name, this.email, this.phoneNumber, this.address});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -27,24 +35,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
-  final descriptionController = TextEditingController();
+  final addressController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      fullNameController.text = widget.name ?? '';
+      emailController.text = widget.email ?? '';
+      phoneNumberController.text = widget.phoneNumber ?? '';
+      addressController.text = widget.address ?? '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as EditProfileArgs;
-    final auth = args.auth;
-
-    if (kDebugMode) {
-      print('edit profile edit_profile_args');
-      print(auth.name);
-      print(auth.email);
-    }
-
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     Orientation orientation = MediaQuery.of(context).orientation;
     Size size = MediaQuery.of(context).size;
@@ -56,7 +62,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             print(state.message);
           }
         }
-        if (state is AuthFinish) {}
       },
       child: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
@@ -150,9 +155,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   ),
                                   Container(
                                     margin: const EdgeInsets.only(bottom: 32),
-                                    child: Description(
-                                      descriptionController:
-                                          descriptionController,
+                                    child: Address(
+                                      controller: addressController,
                                       minLines: 3,
                                       maxLines: null,
                                       maxLength: null,
@@ -168,8 +172,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           print(emailController.text.trim());
                                           print(phoneNumberController.text
                                               .trim());
-                                          print(descriptionController.text
-                                              .trim());
+                                          print(addressController.text.trim());
                                         }
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -215,25 +218,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 }
 
-class Description extends StatelessWidget {
+class Address extends StatelessWidget {
   final int? minLines;
   final int? maxLines;
   final int? maxLength;
 
-  const Description({
+  const Address({
     Key? key,
-    required this.descriptionController,
+    required this.controller,
     required this.minLines,
     required this.maxLines,
     required this.maxLength,
   }) : super(key: key);
 
-  final TextEditingController descriptionController;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: descriptionController,
+      controller: controller,
       minLines: minLines,
       maxLines: maxLines,
       maxLength: maxLength,
@@ -258,7 +261,7 @@ class Description extends StatelessWidget {
             color: MyTheme.splash,
           ),
         ),
-        labelText: 'Description',
+        labelText: 'Address',
         labelStyle: GoogleFonts.sono(
           textStyle: TextStyle(
             color: MyTheme.splash.withOpacity(0.7),

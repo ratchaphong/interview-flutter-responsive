@@ -23,6 +23,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
+    on<LogoutEvnet>((event, emit) async {
+      emit(AuthLoading());
+      try {
+        emit(LogoutFinish()); // wait a moment.
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
+        emit(AuthError(e.toString()));
+      }
+    });
+
     on<SignUpEvent>((event, emit) async {
       emit(AuthLoading());
       try {

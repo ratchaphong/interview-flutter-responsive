@@ -62,7 +62,6 @@ class MyApp extends StatelessWidget {
           '/login': (context) => const LoginScreen(),
           '/signup': (context) => const SignUpScreen(),
           '/profile': (context) => const ProfileScreen(),
-          '/profile/edit': (context) => const EditProfileScreen(),
           '/extract_arguments': (context) => const ExtractArgumentsScreen(),
         },
         onGenerateRoute: (settings) {
@@ -74,6 +73,19 @@ class MyApp extends StatelessWidget {
                 return PassArgumentsScreen(
                   title: args.title,
                   message: args.message,
+                );
+              },
+            );
+          } else if (settings.name == EditProfileScreen.routeName) {
+            final args = settings.arguments as EditProfileScreen;
+
+            return MaterialPageRoute(
+              builder: (context) {
+                return EditProfileScreen(
+                  name: args.name,
+                  email: args.email,
+                  phoneNumber: args.phoneNumber,
+                  address: args.address,
                 );
               },
             );

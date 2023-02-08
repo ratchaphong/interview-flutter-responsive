@@ -104,12 +104,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               icon: Icons.edit_outlined,
                               iconSize: iconSize,
                               onTap: () {
-                                // Navigator.of(context)
-                                //     .pushNamed('/profile/edit');
                                 Navigator.pushNamed(
                                   context,
                                   "/profile/edit",
-                                  arguments: EditProfileArgs(state.auth),
+                                  arguments: EditProfileScreen(
+                                    name: state.auth.name,
+                                    email: state.auth.email,
+                                    phoneNumber: state.auth.phoneNumber,
+                                    address: state.auth.address,
+                                  ),
                                 );
                               },
                             ),
