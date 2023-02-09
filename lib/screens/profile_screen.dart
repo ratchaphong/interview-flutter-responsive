@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
+import 'package:flutter_responsive/blocs/contact/contact_bloc.dart';
 import 'package:flutter_responsive/mytheme.dart';
+import 'package:flutter_responsive/screens/edit_contact_screen.dart';
 import 'package:flutter_responsive/screens/edit_profile_screen.dart';
 import 'package:flutter_responsive/widgets/article_widget.dart';
 import 'package:flutter_responsive/widgets/avatar.dart';
@@ -104,14 +106,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               icon: Icons.edit_outlined,
                               iconSize: iconSize,
                               onTap: () {
+                                // Navigator.pushNamed(
+                                //   context,
+                                //   "/profile/edit",
+                                //   arguments: EditProfileScreen(
+                                //     name: state.contact.name,
+                                //     email: state.contact.email,
+                                //     phoneNumber: state.contact.phoneNumber,
+                                //     address: state.contact.address,
+                                //   ),
+                                // );
                                 Navigator.pushNamed(
                                   context,
-                                  "/profile/edit",
-                                  arguments: EditProfileScreen(
-                                    name: state.auth.name,
-                                    email: state.auth.email,
-                                    phoneNumber: state.auth.phoneNumber,
-                                    address: state.auth.address,
+                                  "/contact/edit",
+                                  arguments: EditContactScreen(
+                                    id: state.auth.id ?? 0,
                                   ),
                                 );
                               },

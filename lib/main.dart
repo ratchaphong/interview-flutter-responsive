@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
+import 'package:flutter_responsive/blocs/contact/contact_bloc.dart';
 import 'package:flutter_responsive/mytheme.dart';
 import 'package:flutter_responsive/provider/auth.dart';
+import 'package:flutter_responsive/provider/contact.dart';
 import 'package:flutter_responsive/repository/auth.dart';
+import 'package:flutter_responsive/repository/contact.dart';
+import 'package:flutter_responsive/screens/edit_contact_screen.dart';
 import 'package:flutter_responsive/screens/edit_profile_screen.dart';
 import 'package:flutter_responsive/screens/extract_arguments_screen.dart';
 import 'package:flutter_responsive/screens/login_screen.dart';
@@ -26,6 +30,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(AuthRepository(AuthProvider()))),
+        BlocProvider<ContactBloc>(
+            create: (context) =>
+                ContactBloc(ContactRepository(ContactProvider()))),
       ],
       child: MaterialApp(
         title: 'Find Seat',
@@ -86,6 +93,16 @@ class MyApp extends StatelessWidget {
                   email: args.email,
                   phoneNumber: args.phoneNumber,
                   address: args.address,
+                );
+              },
+            );
+          } else if (settings.name == EditContactScreen.routeName) {
+            final args = settings.arguments as EditContactScreen;
+
+            return MaterialPageRoute(
+              builder: (context) {
+                return EditContactScreen(
+                  id: args.id,
                 );
               },
             );

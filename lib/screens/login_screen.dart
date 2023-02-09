@@ -244,8 +244,10 @@ class LoginForm extends StatelessWidget {
                   if (emailController.text.trim() != '' &&
                       passwordController.text.trim() != '') {
                     BlocProvider.of<AuthBloc>(context).add(
-                      LoginEvent(emailController.text.trim(),
-                          passwordController.text.trim()),
+                      LoginEvent(
+                        emailController.text.trim(),
+                        passwordController.text.trim(),
+                      ),
                     );
                     Navigator.of(context).pushNamed("/profile");
                   }
