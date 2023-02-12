@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
 import 'package:flutter_responsive/blocs/contact/contact_bloc.dart';
+import 'package:flutter_responsive/environment.dart';
 import 'package:flutter_responsive/mytheme.dart';
 import 'package:flutter_responsive/provider/auth.dart';
 import 'package:flutter_responsive/provider/contact.dart';
@@ -122,10 +123,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-class Environment {
-  static String get fileName =>
-      kReleaseMode ? "lib/.env.production" : "lib/.env.development";
-  static String get apiUrl => dotenv.env['API_URL'] ?? '';
 }
