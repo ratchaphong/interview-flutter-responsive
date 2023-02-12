@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +8,7 @@ import 'package:flutter_responsive/widgets/input_form.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -247,9 +247,12 @@ class LoginForm extends StatelessWidget {
                       LoginEvent(
                         emailController.text.trim(),
                         passwordController.text.trim(),
+                        (token) {
+                          _storeLoggedInStatus(true, token ?? '');
+                          Navigator.of(context).pushNamed("/profile");
+                        },
                       ),
                     );
-                    Navigator.of(context).pushNamed("/profile");
                   }
                 },
                 style: ElevatedButton.styleFrom(
@@ -353,4 +356,10 @@ class LoginForm extends StatelessWidget {
       ],
     );
   }
+}
+
+void _storeLoggedInStatus(bool isLoggedIn, String token) async {
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  pref.setBool('isLoggedIn', isLoggedIn);
+  pref.setString('token', token);
 }

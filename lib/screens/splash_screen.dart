@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
 import 'package:flutter_responsive/mytheme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -16,6 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+  int splashTime = 3;
 
   @override
   void initState() {
@@ -29,6 +32,20 @@ class _SplashScreenState extends State<SplashScreen>
       reverseCurve: Curves.bounceIn,
     );
     _animationController.forward();
+    Future.delayed(
+      Duration(seconds: splashTime),
+      () async {
+        BlocProvider.of<AuthBloc>(context).add(
+          CheckTokenEvent((isLogin) {
+            if (isLogin) {
+              Navigator.pushNamed(context, '/profile');
+            } else {
+              Navigator.pushNamed(context, '/login');
+            }
+          }),
+        );
+      },
+    );
     super.initState();
   }
 
@@ -40,9 +57,9 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushNamed(context, '/login');
-    });
+    // Timer(const Duration(seconds: splashTime), () {
+    //   Navigator.pushNamed(context, '/login');
+    // });
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));

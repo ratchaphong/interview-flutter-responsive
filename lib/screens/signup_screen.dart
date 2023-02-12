@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
 import 'package:flutter_responsive/mytheme.dart';
-import 'package:flutter_responsive/screens/extract_arguments_screen.dart';
-import 'package:flutter_responsive/screens/pass_arguments_screen.dart';
+// import 'package:flutter_responsive/screens/extract_arguments_screen.dart';
+// import 'package:flutter_responsive/screens/pass_arguments_screen.dart';
 import 'package:flutter_responsive/widgets/input_form.dart';
 import 'package:flutter_responsive/widgets/social_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -198,13 +198,14 @@ class SignUpForm extends StatelessWidget {
                           passwordController.text.trim()) {
                     BlocProvider.of<AuthBloc>(context).add(
                       SignUpEvent(
-                          nameController.text.trim(),
-                          passwordController.text.trim(),
-                          emailController.text.trim()),
+                        nameController.text.trim(),
+                        passwordController.text.trim(),
+                        emailController.text.trim(),
+                        () {
+                          Navigator.of(context).pushNamed("/login");
+                        },
+                      ),
                     );
-                    // ----------------------------
-                    Navigator.of(context).pushNamed("/login");
-                    // ----------------------------
                   }
                 },
                 style: ElevatedButton.styleFrom(

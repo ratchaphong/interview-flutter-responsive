@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
-import 'package:flutter_responsive/blocs/contact/contact_bloc.dart';
 import 'package:flutter_responsive/mytheme.dart';
 import 'package:flutter_responsive/screens/edit_contact_screen.dart';
-import 'package:flutter_responsive/screens/edit_profile_screen.dart';
 import 'package:flutter_responsive/widgets/article_widget.dart';
 import 'package:flutter_responsive/widgets/avatar.dart';
 import 'package:flutter_responsive/widgets/contact_info.dart';
@@ -47,7 +45,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: MyTheme.splash,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            BlocProvider.of<AuthBloc>(context).add(
+              LogoutEvent(),
+            );
+            // Navigator.of(context).pop();
+            Navigator.of(context).pushNamed("/");
           },
           icon: const Icon(Icons.chevron_left),
         ),

@@ -22,8 +22,7 @@ class AuthProvider {
   ) async {
     try {
       if (kDebugMode) {
-        print("$email\n$password");
-        print(mapData);
+        print("auth provider: login\n$email\t$password\t$mapData");
       }
       // var url = Uri.https(
       //   'www.thecocktaildb.com',
@@ -53,7 +52,7 @@ class AuthProvider {
   ) async {
     try {
       if (kDebugMode) {
-        print("$name\n$password\n$email");
+        print("auth provider: signup\n$name\t$password\t$email");
       }
       // var url = Uri.https(
       //   'www.thecocktaildb.com',
@@ -68,6 +67,34 @@ class AuthProvider {
       // var data = AuthModel.fromJson(r.body).data;
       // return data;
       return;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      throw Exception(e.toString());
+    } finally {}
+  }
+
+  Future<Data> checkToken(
+    String token,
+  ) async {
+    try {
+      if (kDebugMode) {
+        print("auth provider: checkToken\n$token");
+      }
+      // var url = Uri.https(
+      //   'www.thecocktaildb.com',
+      //   '/api/json/v1/1/search.php',
+      // );
+      // var r = await http.get(url);
+      // if (r.statusCode != 200) {
+      //   if (kDebugMode) {
+      //     print("Error");
+      //   }
+      // }
+      // var data = AuthModel.fromJson(r.body).data;
+      // return data;
+      return c;
     } catch (e) {
       if (kDebugMode) {
         print(e);

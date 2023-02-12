@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_responsive/blocs/auth/auth_bloc.dart';
 import 'package:flutter_responsive/widgets/menu_list_tile.dart';
 
 class SettingWidget extends StatefulWidget {
@@ -35,7 +37,10 @@ class _SettingWidgetState extends State<SettingWidget> {
                   icon: Icons.logout_outlined,
                   endIcon: true,
                   onPress: () {
-                    Navigator.of(context).pop();
+                    BlocProvider.of<AuthBloc>(context).add(
+                      LogoutEvent(),
+                    );
+                    Navigator.of(context).pushNamed("/");
                   },
                 ),
               ],

@@ -24,4 +24,11 @@ class AuthRepository {
     await provider.signup(name, password, email);
     return;
   }
+
+  Future<Data?> checkToken(
+    String token,
+  ) async {
+    authData = await provider.checkToken(token);
+    return authData;
+  }
 }

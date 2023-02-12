@@ -22,3 +22,7 @@ class AuthFinish extends AuthState {
 class LogoutFinish extends AuthState {}
 
 class SignUpFinish extends AuthState {}
+
+class CheckTokenFinish extends AuthFinish {
+  CheckTokenFinish(super.auth);
+}
